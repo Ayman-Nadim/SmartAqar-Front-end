@@ -7,18 +7,42 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Building2, Eye, EyeOff, ArrowLeft } from "lucide-react"
+import { Eye, EyeOff, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle sign in logic here
-    console.log("Sign in:", { email, password })
+    setIsLoading(true)
+
+    try {
+      // Simulate authentication - in real app, this would be an API call
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // Store user session (in real app, use proper auth tokens)
+      localStorage.setItem(
+        "smartaqar_user",
+        JSON.stringify({
+          email,
+          name: email.split("@")[0],
+          role: "agent",
+        }),
+      )
+
+      // Redirect to dashboard
+      router.push("/dashboard")
+    } catch (error) {
+      console.error("Login failed:", error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -41,14 +65,14 @@ export default function SignInPage() {
 
         <Card className="border-border shadow-2xl bg-card/80 backdrop-blur">
           <CardHeader className="text-center space-y-4">
-            <div className="flex justify-center">                              
-              <div className="w-30 h-25 rounded-lg flex items-center justify-center">                                  
-                <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-30 w-30" />                              
-              </div>                          
+            <div className="flex justify-center">
+              <div className="w-30 h-25 rounded-lg flex items-center justify-center">
+                <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-30 w-30" />
+              </div>
             </div>
             <div>
               <CardTitle className="text-2xl text-blue-600 font-bold font-serif">Welcome back</CardTitle>
-              <CardDescription>Sign in to your PropCatalog account</CardDescription>
+              <CardDescription>Sign in to your SMARTAQAR account</CardDescription>
             </div>
           </CardHeader>
 
@@ -107,9 +131,10 @@ export default function SignInPage() {
 
               <Button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
               >
-                Sign In
+                {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
 
