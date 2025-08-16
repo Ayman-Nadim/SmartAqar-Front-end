@@ -1,45 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Building2, Users, Zap, Target, BarChart3, Mail, CheckCircle, Star } from "lucide-react"
+import { ArrowRight, Building2, Users, Zap, Target, BarChart3, Mail, CheckCircle, Star, Check } from "lucide-react"
 import Link from "next/link"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center space-x-2 p-4">                            
-            <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-16 w-16" />                            
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-blue-600">SmartAqar</span>
-              <span className="text-sm text-gray-500">by 1Confirmed</span>
-            </div>                        
-          </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                Features
-              </a>
-              <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">
-                Testimonials
-              </a>
-              <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-                Pricing
-              </a>
-              <Link href="/signin">
-                <Button variant="outline" size="sm">
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button size="sm">Get Started</Button>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="py-20 lg:py-32 relative overflow-hidden">
@@ -100,13 +71,14 @@ export default function LandingPage() {
                   className="rounded-xl shadow-2xl w-full"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-secondary to-accent rounded-full opacity-20 blur-xl"></div>
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-secondary to-accent rounded-full opacity-20 blur-xl animate-pulse"></div>
               <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full opacity-20 blur-xl"></div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Trusted by Real Estate Professionals Section */}
       <section className="py-16 bg-gradient-to-r from-muted/30 to-muted/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
@@ -346,6 +318,180 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-4 mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground font-serif">Simple, Transparent Pricing</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Choose the perfect plan for your real estate agency. All plans include our core features.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Starter Plan */}
+            <Card className="border-border hover:shadow-lg transition-all relative">
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-2xl font-serif">Starter</CardTitle>
+                <CardDescription>Perfect for small agencies</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-foreground">299 DH</span>
+                  <span className="text-muted-foreground">/month</span>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Up to 50 properties</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">100 prospects database</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Basic automated matching</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Weekly campaigns</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Email support</span>
+                  </li>
+                </ul>
+                <Button className="w-full mt-6 bg-transparent" variant="outline">
+                  Get Started
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Professional Plan */}
+            <Card className="border-primary hover:shadow-lg transition-all relative shadow-lg">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-1">Most Popular</Badge>
+              </div>
+              <CardHeader className="text-center pb-8 pt-8">
+                <CardTitle className="text-2xl font-serif">Professional</CardTitle>
+                <CardDescription>Ideal for growing agencies</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-foreground">599 DH</span>
+                  <span className="text-muted-foreground">/month</span>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Up to 200 properties</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">500 prospects database</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Advanced automated matching</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Daily campaigns</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Analytics & insights</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Priority support</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Custom branding</span>
+                  </li>
+                </ul>
+                <Button className="w-full mt-6 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90">
+                  Get Started
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Enterprise Plan */}
+            <Card className="border-border hover:shadow-lg transition-all relative">
+              <CardHeader className="text-center pb-8">
+                <CardTitle className="text-2xl font-serif">Enterprise</CardTitle>
+                <CardDescription>For large agencies & networks</CardDescription>
+                <div className="mt-4">
+                  <span className="text-4xl font-bold text-foreground">1299 DH</span>
+                  <span className="text-muted-foreground">/month</span>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Unlimited properties</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Unlimited prospects</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">AI-powered matching</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Real-time campaigns</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Advanced analytics</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">24/7 dedicated support</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">API access</span>
+                  </li>
+                  <li className="flex items-center">
+                    <Check className="h-4 w-4 text-primary mr-3" />
+                    <span className="text-sm">Multi-agency management</span>
+                  </li>
+                </ul>
+                <Button className="w-full mt-6 bg-transparent" variant="outline">
+                  Contact Sales
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">
+              All plans include 14-day free trial • No setup fees • Cancel anytime
+            </p>
+            <div className="flex justify-center items-center space-x-6 text-sm text-muted-foreground">
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                SSL Security
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                Data Backup
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-primary mr-2" />
+                99.9% Uptime
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent text-white relative overflow-hidden">
         <div className="absolute inset-0">
@@ -379,103 +525,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-sidebar border-t border-sidebar-border">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-6 w-6" />
-                <span className="text-lg font-bold text-sidebar-foreground">SMARTAQAR</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Revolutionizing real estate with intelligent automation and prospect matching.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sidebar-foreground mb-4">Product</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    API
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Integrations
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sidebar-foreground mb-4">Company</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-sidebar-foreground mb-4">Support</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Status
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-sidebar-foreground transition-colors">
-                    Privacy Policy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-sidebar-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2025 SMARTAQAR. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

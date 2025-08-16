@@ -16,7 +16,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: "PropCatalog - Real Estate SaaS Platform",
+  title: "SMARTAQAR - Real Estate SaaS Platform",
   description: "Revolutionize your property catalogs with automated prospect matching and campaign management",
   generator: "v0.app",
 }
