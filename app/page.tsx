@@ -11,10 +11,13 @@ export default function LandingPage() {
       <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-10 w-10" />
-              <span className="text-xl font-bold text-foreground">SMARTAQAR</span>
-            </div>
+          <div className="flex items-center space-x-2 p-4">                            
+            <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-16 w-16" />                            
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-blue-600">SmartAqar</span>
+              <span className="text-sm text-gray-500">by 1Confirmed</span>
+            </div>                        
+          </div>
             <nav className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
                 Features
@@ -116,7 +119,7 @@ export default function LandingPage() {
             <div className="relative group">
               <div className="relative overflow-hidden rounded-xl">
                 <img
-                  src="/luxury-villa-pool-garden.png"
+                  src="/luxury-villa-pool-garden.jpg"
                   alt="Luxury Villa Properties"
                   className="w-full h-64 object-cover transition-transform group-hover:scale-105"
                 />
@@ -130,7 +133,7 @@ export default function LandingPage() {
             <div className="relative group">
               <div className="relative overflow-hidden rounded-xl">
                 <img
-                  src="/modern-apartment-balconies.png"
+                  src="/modern-apartment-balconies.jpeg"
                   alt="Modern Apartments"
                   className="w-full h-64 object-cover transition-transform group-hover:scale-105"
                 />
@@ -144,7 +147,7 @@ export default function LandingPage() {
             <div className="relative group">
               <div className="relative overflow-hidden rounded-xl">
                 <img
-                  src="/retail-space-glass.png"
+                  src="/retail-space-glass.jpg"
                   alt="Commercial Properties"
                   className="w-full h-64 object-cover transition-transform group-hover:scale-105"
                 />
