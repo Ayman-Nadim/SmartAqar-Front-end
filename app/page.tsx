@@ -1,10 +1,22 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Building2, Users, Zap, Target, BarChart3, Mail, CheckCircle, Star, Check } from "lucide-react"
+import {
+  ArrowRight,
+  Building2,
+  Users,
+  Zap,
+  Target,
+  BarChart3,
+  Mail,
+  CheckCircle,
+  Star,
+  Check,
+  Globe,
+  ExternalLink,
+} from "lucide-react"
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
 
 export default function LandingPage() {
   return (
@@ -44,13 +56,16 @@ export default function LandingPage() {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
-                >
-                  Schedule Demo
-                </Button>
+                <Link href="/catalogs">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-lg px-8 bg-transparent border-primary text-primary hover:bg-primary hover:text-white"
+                  >
+                    <Globe className="mr-2 h-5 w-5" />
+                    Browse Catalogs
+                  </Button>
+                </Link>
               </div>
               <div className="flex items-center space-x-6 text-sm text-muted-foreground">
                 <div className="flex items-center">
@@ -78,58 +93,100 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Trusted by Real Estate Professionals Section */}
+      {/* Live Catalogs Showcase */}
       <section className="py-16 bg-gradient-to-r from-muted/30 to-muted/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-2xl lg:text-3xl font-bold text-foreground font-serif">
-              Trusted by Real Estate Professionals
-            </h2>
-            <p className="text-lg text-muted-foreground">See our platform in action across different property types</p>
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground font-serif">Live Property Catalogs</h2>
+            <p className="text-lg text-muted-foreground">See our platform in action with real agency catalogs</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="relative group">
-              <div className="relative overflow-hidden rounded-xl">
-                <img
-                  src="/luxury-villa-pool-garden.jpg"
-                  alt="Luxury Villa Properties"
-                  className="w-full h-64 object-cover transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="font-semibold text-lg">Luxury Villas</h3>
-                  <p className="text-sm opacity-90">Premium residential properties</p>
+            <Card className="group hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Building2 className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Casablanca Premium</h3>
+                      <p className="text-sm text-muted-foreground">Luxury Properties</p>
+                    </div>
+                  </div>
+                  <Badge className="bg-blue-600 text-white">Luxury</Badge>
                 </div>
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="relative overflow-hidden rounded-xl">
-                <img
-                  src="/modern-apartment-balconies.jpeg"
-                  alt="Modern Apartments"
-                  className="w-full h-64 object-cover transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="font-semibold text-lg">Modern Apartments</h3>
-                  <p className="text-sm opacity-90">Urban living solutions</p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Premium real estate in Morocco's economic capital with 45+ luxury properties.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">casablanca-premium.smartaqar.com</span>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/catalog/casablanca-premium">
+                      <ExternalLink className="h-4 w-4 mr-1" />
+                      Visit
+                    </Link>
+                  </Button>
                 </div>
-              </div>
-            </div>
-            <div className="relative group">
-              <div className="relative overflow-hidden rounded-xl">
-                <img
-                  src="/retail-space-glass.jpg"
-                  alt="Commercial Properties"
-                  className="w-full h-64 object-cover transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="font-semibold text-lg">Commercial Spaces</h3>
-                  <p className="text-sm opacity-90">Business opportunities</p>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                      <Building2 className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Rabat Elite</h3>
+                      <p className="text-sm text-muted-foreground">Capital Properties</p>
+                    </div>
+                  </div>
+                  <Badge className="bg-purple-600 text-white">Modern</Badge>
                 </div>
-              </div>
-            </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Elite properties in Morocco's capital with curated luxury selections.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">rabat-elite.smartaqar.com</span>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/catalog/rabat-elite">
+                      <ExternalLink className="h-4 w-4 mr-1" />
+                      Visit
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center">
+                      <Building2 className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">More Catalogs</h3>
+                      <p className="text-sm text-muted-foreground">Browse All</p>
+                    </div>
+                  </div>
+                  <Badge variant="secondary">5+ More</Badge>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Discover more real estate catalogs from agencies across Morocco.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">View all catalogs</span>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/catalogs">
+                      <Globe className="h-4 w-4 mr-1" />
+                      Browse
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -422,7 +479,7 @@ export default function LandingPage() {
             <Card className="border-border hover:shadow-lg transition-all relative">
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl font-serif">Enterprise</CardTitle>
-                <CardDescription>For large agencies & networks</CardDescription>
+                <CardDescription>For large agencies</CardDescription>
                 <div className="mt-4">
                   <span className="text-4xl font-bold text-foreground">1299 DH</span>
                   <span className="text-muted-foreground">/month</span>
@@ -456,11 +513,11 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 text-primary mr-3" />
-                    <span className="text-sm">API access</span>
+                    <span className="text-sm">White-label solution</span>
                   </li>
                   <li className="flex items-center">
                     <Check className="h-4 w-4 text-primary mr-3" />
-                    <span className="text-sm">Multi-agency management</span>
+                    <span className="text-sm">API access</span>
                   </li>
                 </ul>
                 <Button className="w-full mt-6 bg-transparent" variant="outline">
@@ -469,63 +526,126 @@ export default function LandingPage() {
               </CardContent>
             </Card>
           </div>
-
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">
-              All plans include 14-day free trial • No setup fees • Cancel anytime
-            </p>
-            <div className="flex justify-center items-center space-x-6 text-sm text-muted-foreground">
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                SSL Security
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                Data Backup
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-primary mr-2" />
-                99.9% Uptime
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto space-y-8">
-            <h2 className="text-3xl lg:text-4xl font-bold font-serif">Ready to Transform Your Real Estate Business?</h2>
-            <p className="text-xl opacity-90">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif">
+              Ready to Transform Your Real Estate Business?
+            </h2>
+            <p className="text-xl text-white/90">
               Join hundreds of agencies already using SMARTAQAR to automate their property marketing and boost sales.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/signup">
-                <Button size="lg" variant="secondary" className="text-lg px-8 bg-white text-primary hover:bg-white/90">
+                <Button size="lg" className="text-lg px-8 bg-white text-primary hover:bg-white/90">
                   Start Your Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary bg-transparent"
-              >
-                Schedule a Demo
-              </Button>
+              <Link href="/contact">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-lg px-8 border-white text-white hover:bg-white hover:text-primary bg-transparent"
+                >
+                  Schedule Demo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <Footer />
+      <footer className="bg-background border-t border-border py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground font-serif">SMARTAQAR</h3>
+              <p className="text-sm text-muted-foreground">
+                Revolutionizing real estate marketing with intelligent automation and comprehensive catalog management.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground">Product</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="#features" className="hover:text-primary">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#pricing" className="hover:text-primary">
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/catalogs" className="hover:text-primary">
+                    Browse Catalogs
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/api" className="hover:text-primary">
+                    API
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground">Company</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/about" className="hover:text-primary">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="hover:text-primary">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/careers" className="hover:text-primary">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-primary">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-sm font-semibold text-foreground">Support</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/help" className="hover:text-primary">
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/docs" className="hover:text-primary">
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/status" className="hover:text-primary">
+                    Status
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
+            <p>&copy; 2024 SMARTAQAR. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

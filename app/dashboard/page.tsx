@@ -17,16 +17,13 @@ import {
   Trash2,
   Eye,
   Target,
+  Palette,
+  Globe,
 } from "lucide-react"
 import { AddPropertyModal } from "@/components/add-property-modal"
 import { PropertyFilters } from "@/components/property-filters"
 import Link from "next/link"
-
-interface User {
-  email: string
-  name: string
-  role: string
-}
+import { AuthService, type User } from "@/lib/auth"
 
 interface Property {
   id: string
@@ -48,17 +45,27 @@ export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null)
   const [properties, setProperties] = useState<Property[]>([])
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    // Check authentication
-    const userData = localStorage.getItem("smartaqar_user")
-    if (!userData) {
-      router.push("/signin")
-      return
+    const loadUserData = async () => {
+      try {
+        const userData = await AuthService.getCurrentUser()
+        if (!userData) {
+          router.push("/signin")
+          return
+        }
+        setUser(userData)
+      } catch (error) {
+        router.push("/signin")
+        return
+      } finally {
+        setIsLoading(false)
+      }
     }
 
-    setUser(JSON.parse(userData))
+    loadUserData()
 
     // Load sample properties
     const sampleProperties = [
@@ -111,8 +118,8 @@ export default function DashboardPage() {
     setFilteredProperties(sampleProperties)
   }, [router])
 
-  const handleLogout = () => {
-    localStorage.removeItem("smartaqar_user")
+  const handleLogout = async () => {
+    await AuthService.logout()
     router.push("/")
   }
 
@@ -156,8 +163,19 @@ export default function DashboardPage() {
     setFilteredProperties(filtered)
   }
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
   if (!user) {
-    return <div>Loading...</div>
+    return null
   }
 
   const formatPrice = (price: number) => {
@@ -196,6 +214,12 @@ export default function DashboardPage() {
             </div>
 
             <div className="flex items-center space-x-4">
+              <Link href="/catalog-builder">
+                <Button variant="outline" size="sm">
+                  <Palette className="h-4 w-4 mr-2" />
+                  Catalog Builder
+                </Button>
+              </Link>
               <Link href="/campaigns">
                 <Button variant="outline" size="sm">
                   <Mail className="h-4 w-4 mr-2" />
@@ -224,6 +248,41 @@ export default function DashboardPage() {
       </header>
 
       <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <Card className="bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border-primary/20">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                    <Globe className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Your Property Catalog</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Create and customize your own property showcase website
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Badge variant="secondary">
+                    {user?.agencyName
+                      ?.toLowerCase()
+                      .replace(/\s+/g, "-")
+                      .replace(/[^a-z0-9-]/g, "") || "your-agency"}
+                    .smartaqar.com
+                  </Badge>
+                  <Link href="/catalog-builder">
+                    <Button>
+                      <Palette className="h-4 w-4 mr-2" />
+                      Customize Catalog
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>

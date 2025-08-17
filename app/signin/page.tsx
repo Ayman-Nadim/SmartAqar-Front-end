@@ -10,36 +10,32 @@ import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { AuthService } from "@/lib/auth"
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError("")
 
     try {
-      // Simulate authentication - in real app, this would be an API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const result = await AuthService.signIn(email, password)
 
-      // Store user session (in real app, use proper auth tokens)
-      localStorage.setItem(
-        "smartaqar_user",
-        JSON.stringify({
-          email,
-          name: email.split("@")[0],
-          role: "agent",
-        }),
-      )
-
-      // Redirect to dashboard
-      router.push("/dashboard")
+      if (result.success) {
+        // Redirect to dashboard
+        router.push("/dashboard")
+      } else {
+        setError(result.error || "Sign in failed")
+      }
     } catch (error) {
-      console.error("Login failed:", error)
+      setError("An unexpected error occurred")
     } finally {
       setIsLoading(false)
     }
@@ -77,6 +73,10 @@ export default function SignInPage() {
           </CardHeader>
 
           <CardContent className="space-y-6">
+            {error && (
+              <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">{error}</div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email address</Label>

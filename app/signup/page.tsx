@@ -7,12 +7,17 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Building2, Eye, EyeOff, ArrowLeft, CheckCircle } from "lucide-react"
+import { Eye, EyeOff, ArrowLeft, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { AuthService } from "@/lib/auth"
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -23,10 +28,44 @@ export default function SignUpPage() {
     agreeToTerms: false,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle sign up logic here
-    console.log("Sign up:", formData)
+    setIsLoading(true)
+    setError("")
+
+    // Validation
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match")
+      setIsLoading(false)
+      return
+    }
+
+    if (!formData.agreeToTerms) {
+      setError("Please agree to the terms and conditions")
+      setIsLoading(false)
+      return
+    }
+
+    try {
+      const result = await AuthService.signUp({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        agencyName: formData.agencyName,
+      })
+
+      if (result.success) {
+        // Redirect to dashboard
+        router.push("/dashboard")
+      } else {
+        setError(result.error || "Sign up failed")
+      }
+    } catch (error) {
+      setError("An unexpected error occurred")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -53,18 +92,22 @@ export default function SignUpPage() {
 
         <Card className="border-border shadow-2xl bg-card/80 backdrop-blur">
           <CardHeader className="text-center space-y-4">
-            <div className="flex justify-center">                              
-              <div className="w-25 h-20 rounded-lg flex items-center justify-center">                                  
-                <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-25 w-25" />                              
-              </div>                          
+            <div className="flex justify-center">
+              <div className="w-25 h-20 rounded-lg flex items-center justify-center">
+                <img src="/smartaqar-logo.png" alt="SMARTAQAR Logo" className="h-25 w-25" />
+              </div>
             </div>
             <div>
-              <CardTitle className="text-2xl text-green-600 font-bold font-serif">Welcome back</CardTitle>
-              <CardDescription>Sign in to your PropCatalog account</CardDescription>
+              <CardTitle className="text-2xl text-green-600 font-bold font-serif">Create your account</CardTitle>
+              <CardDescription>Start your 14-day free trial today</CardDescription>
             </div>
           </CardHeader>
 
           <CardContent className="space-y-6">
+            {error && (
+              <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">{error}</div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -186,9 +229,10 @@ export default function SignUpPage() {
 
               <Button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-gradient-to-r from-secondary to-accent hover:from-secondary/90 hover:to-accent/90"
               >
-                Create Account
+                {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
 
